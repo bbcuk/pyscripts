@@ -1,0 +1,42 @@
+# create_dir_if_not_there.py
+# Created: 2017 3 24
+
+'''
+Checks to see if a directory exists in the users home directory, if not then create it.
+'''
+
+__author__  = 'Li Chao'
+__version__ = '1.0'
+import sys
+import os.path
+import argparse
+
+def get_parser():
+    parser = argparse.ArgumentParser(description='create dir if not exist')
+    parser.add_argument('create_dir', metavar='CREATE_DIR', type=str, nargs=1, help='the directory you wanna create')
+    
+    return parser
+
+def create_dir_if_not_there(createdir):
+    try:
+        if not os.path.exists(createdir):
+            os.makedirs(createdir)
+    except Exception, e:
+        print (e)
+
+def main():
+	    # adding command line argument
+    parser = get_parser()
+    args = vars(parser.parse_args())
+
+    # Set the variable create_dir with the first argument passed
+    create_dir = args['create_dir'][0]
+
+
+    create_dir_if_not_there(create_dir)
+
+if __name__ == '__main__':
+    home = os.path.expanduser("~") 
+    print(home)
+    main()
+
